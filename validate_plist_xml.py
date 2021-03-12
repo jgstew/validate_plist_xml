@@ -1,5 +1,6 @@
 #!/usr/local/python
 """
+# pylint: disable=line-too-long
 - https://stackoverflow.com/questions/15798/how-do-i-validate-xml-against-a-dtd-file-in-python
 """
 
@@ -9,6 +10,7 @@ import sys
 
 import lxml.etree
 
+# pylint: disable=line-too-long
 # https://docs.python.org/3/library/io.html
 # https://www.apple.com/DTDs/PropertyList-1.0.dtd
 DTD_PLIST = lxml.etree.DTD(io.StringIO(
@@ -47,18 +49,29 @@ def validate_plist_xml(file_pathname):
         return False
 
     # check for XML syntax errors
-    except lxml.etree.XMLSyntaxError:
+    except lxml.etree.XMLSyntaxError as err:
         print('XML Syntax Error in: %s' % file_pathname)
+        print(err)
+        return False
+
+    # all other errors
+    except Exception as err:  # pylint: disable=broad-except
+        print(err)
         return False
 
     # check if xml is valid to DTD spec
-    is_valid = DTD_PLIST.validate(doc)
-
-    if not is_valid:
+    try:
+        DTD_PLIST.assertValid(doc)
+    except lxml.etree.DocumentInvalid as err:
         print('Failed DTD Validation: %s' % file_pathname)
+        print(err)
+        return False
+    # all other errors
+    except Exception as err:  # pylint: disable=broad-except
+        print(err)
         return False
 
-    return is_valid
+    return True
 
 
 def main(folder_path=".", file_extensions=('.recipe', '.plist', '.profile')):
