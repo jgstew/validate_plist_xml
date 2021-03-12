@@ -75,7 +75,7 @@ def validate_plist_xml(file_pathname):
 
 
 def main(folder_path=".", file_extensions=('.recipe', '.plist', '.profile')):
-    """Run this function by default"""
+    """Run this function by default."""
     # https://stackoverflow.com/questions/3964681/find-all-files-in-a-directory-with-extension-txt-in-python
 
     count_errors = 0
