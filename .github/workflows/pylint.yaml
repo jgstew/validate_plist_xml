@@ -31,4 +31,5 @@ jobs:
       - name: Install requirements
         run: pip install -r requirements.txt
       - name: pylint files
+        # https://stackoverflow.com/a/63044665/861745
         run: pylint $(git ls-files '*.py')
