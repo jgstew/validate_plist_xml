@@ -6,11 +6,13 @@ on:
     paths:
       - "**.py"
       - ".pylintrc"
+      - "requirements.txt"
       - ".github/workflows/pylint.yaml"
   pull_request:
     paths:
       - "**.py"
       - ".pylintrc"
+      - "requirements.txt"
       - ".github/workflows/pylint.yaml"
 
 jobs:
