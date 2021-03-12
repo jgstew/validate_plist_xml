@@ -36,7 +36,7 @@ DTD_PLIST = lxml.etree.DTD(io.StringIO(
 ))
 
 
-def validate_plist_xml(file_pathname):
+def validate_plist(file_pathname):
     """This will validate the plist XML file against the DTD"""
     # parse xml
     try:
@@ -89,7 +89,7 @@ def main(folder_path=".", file_extensions=('.recipe', '.plist', '.profile')):
                 if file.lower().endswith(file_extensions):
                     count_files = count_files + 1
                     file_path = os.path.join(root, file)
-                    result = validate_plist_xml(file_path)
+                    result = validate_plist(file_path)
                     if not result:
                         count_errors = count_errors + 1
 
