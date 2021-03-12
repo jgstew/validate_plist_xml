@@ -6,7 +6,7 @@ By default configured to check files with the following extensions: `('.recipe',
 ## Example:
 
 ```
-$ python3 validate_plist_xml.py 
+$ python3 validate_plist_xml
 XML Syntax Error in: ./test/bad/example-bad-xml-tags.recipe
 Opening and ending tag mismatch: BAD_TAG line 4 and dict, line 15, column 8 (example-bad-xml-tags.recipe, line 15)
 Failed DTD Validation: ./test/bad/example-bad-dtd.recipe
