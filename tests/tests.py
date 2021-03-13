@@ -14,7 +14,7 @@ import sys
 site.addsitedir(
     os.path.join(
         os.path.dirname(os.path.dirname(os.path.abspath(__file__))) , "src")
-    )
+)
 
 import validate_plist_xml  # pylint: disable=import-error,wrong-import-position
 
@@ -22,7 +22,7 @@ import validate_plist_xml  # pylint: disable=import-error,wrong-import-position
 num_errors = validate_plist_xml.validate_plist_xml.validate_plist_files()
 
 try:
-    assert num_errors == 2
+    assert num_errors == 1
 except AssertionError:
     print("Error: Tests failed")
     sys.exit(num_errors)
