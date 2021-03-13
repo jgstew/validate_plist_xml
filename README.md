@@ -13,6 +13,8 @@ The code is found within `src/validate_plist_xml/validate_plist_xml.py` within t
 
 This module checks that the plist is valid XML and meets the Apple Plist DTD here: https://www.apple.com/DTDs/PropertyList-1.0.dtd
 
+I have not yet tested this with Python 2 but it should work there too.
+
 ## Install with pip:
 ```
 pip install validate-plist-xml
