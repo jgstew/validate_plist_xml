@@ -13,10 +13,14 @@ on:
       - "requirements.txt"
       - ".github/workflows/tests.yaml"
 
+# https://github.com/actions/setup-python
 jobs:
   tests:
-
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ['2.6', '2.7', '3.6', '3.7', '3.8']
 
     steps:
       - uses: actions/checkout@v2
