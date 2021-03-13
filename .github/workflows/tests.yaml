@@ -1,0 +1,30 @@
+---
+name: tests
+
+on:
+  push:
+    paths:
+      - "**.py"
+      - "requirements.txt"
+      - ".github/workflows/tests.yaml"
+  pull_request:
+    paths:
+      - "**.py"
+      - "requirements.txt"
+      - ".github/workflows/tests.yaml"
+
+jobs:
+  tests:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run Tests
+        run: python tests/tests.py
