@@ -7,18 +7,18 @@ By default configured to check files with the following extensions: `('.recipe',
 
 By default, runs in the current working directory against all files in that directory and all subdirectories.
 
-This module depends upon the `lxml` module. (which is handled by pip automatically)
+This module depends upon the `lxml` module. (which is handled by [pip](https://pypi.org/project/validate-plist-xml/) automatically)
 
 The code is found within `src/validate_plist_xml/validate_plist_xml.py` within the [git repo](https://github.com/jgstew/validate_plist_xml/blob/main/src/validate_plist_xml/validate_plist_xml.py).
 
 This module checks that the plist is valid XML and meets the Apple Plist DTD here: https://www.apple.com/DTDs/PropertyList-1.0.dtd
 
-**Install with pip:**
+## Install with pip:
 ```
 pip install validate-plist-xml
 ```
 
-This will install lxml if not already installed.
+This will install `lxml` if not already installed.
 
 ## Usage Examples:
 
@@ -84,4 +84,19 @@ jobs:
 
       - name: Lint Plist files
         run: python3 -m validate_plist_xml
+```
+
+### Use in another Python script:
+
+```
+import validate_plist_xml
+
+# The default folder is `.` but could be any folder
+validate_plist_xml.validate_plist_xml.main('.')
+```
+
+or as a one liner:
+
+```
+python3 -c "import validate_plist_xml; validate_plist_xml.validate_plist_xml.main('.')"
 ```
