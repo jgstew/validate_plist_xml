@@ -37,7 +37,7 @@ DTD_PLIST = lxml.etree.DTD(io.StringIO(
 
 
 def validate_plist(file_pathname):
-    """This will validate the plist XML file against the DTD"""
+    """This will validate a single plist XML file against the DTD"""
     # parse xml
     try:
         doc = lxml.etree.parse(file_pathname)
@@ -74,8 +74,8 @@ def validate_plist(file_pathname):
     return True
 
 
-def main(folder_path=".", file_extensions=('.recipe', '.plist', '.profile')):
-    """Run this function by default"""
+def validate_plist_files(folder_path=".", file_extensions=('.recipe', '.plist', '.profile')):
+    """Validate all plist files in a folder and subfolders"""
     # https://stackoverflow.com/questions/3964681/find-all-files-in-a-directory-with-extension-txt-in-python
 
     count_errors = 0
@@ -94,6 +94,16 @@ def main(folder_path=".", file_extensions=('.recipe', '.plist', '.profile')):
                         count_errors = count_errors + 1
 
     print("%d errors found in %d plist xml files" % (count_errors, count_files))
+    return count_errors
+
+
+def main(folder_path=".", file_extensions=('.recipe', '.plist', '.profile')):
+    """Run this function by default"""
+
+    # run the validation, get the number of errors
+    count_errors = validate_plist_files(folder_path, file_extensions)
+
+    # return the number of errors as the exit code
     sys.exit(count_errors)
 
 
