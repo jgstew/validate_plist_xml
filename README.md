@@ -24,6 +24,16 @@ Element dict content does not follow the DTD, expecting (key , (array | data | d
 2 errors found in 3 plist xml files
 ```
 
+### Run as Python Script:
+```
+$ python3 src/validate_plist_xml/validate_plist_xml.py 
+XML Syntax Error in: ./tests/bad/example-bad-xml-tags.recipe
+Opening and ending tag mismatch: BAD_TAG line 4 and dict, line 15, column 8 (example-bad-xml-tags.recipe, line 15)
+Failed DTD Validation: ./tests/bad/example-bad-dtd.recipe
+Element dict content does not follow the DTD, expecting (key , (array | data | date | dict | real | integer | string | true | false))*, got (key astring key string key dict key string key array ), line 4
+2 errors found in 3 plist xml files
+```
+
 ### Use as GitHub Action:
 
 - https://github.com/jgstew/jgstew-recipes/blob/main/.github/workflows/plistlint.yaml
