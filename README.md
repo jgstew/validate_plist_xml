@@ -14,9 +14,12 @@ This module checks that the plist is valid XML and meets the Apple Plist DTD her
 
 ## Examples:
 
-### Run as module:
+### Run as Python Script:
+
+The python script can be called directly:
+
 ```
-$ python3 -m validate_plist_xml
+$ python3 src/validate_plist_xml/validate_plist_xml.py 
 XML Syntax Error in: ./tests/bad/example-bad-xml-tags.recipe
 Opening and ending tag mismatch: BAD_TAG line 4 and dict, line 15, column 8 (example-bad-xml-tags.recipe, line 15)
 Failed DTD Validation: ./tests/bad/example-bad-dtd.recipe
@@ -24,9 +27,12 @@ Element dict content does not follow the DTD, expecting (key , (array | data | d
 2 errors found in 3 plist xml files
 ```
 
-### Run as Python Script:
+### Run as module:
+
+If installed through pip as a module, then it can be run like this:
+
 ```
-$ python3 src/validate_plist_xml/validate_plist_xml.py 
+$ python3 -m validate_plist_xml
 XML Syntax Error in: ./tests/bad/example-bad-xml-tags.recipe
 Opening and ending tag mismatch: BAD_TAG line 4 and dict, line 15, column 8 (example-bad-xml-tags.recipe, line 15)
 Failed DTD Validation: ./tests/bad/example-bad-dtd.recipe
