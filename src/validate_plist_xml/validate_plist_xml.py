@@ -8,7 +8,10 @@ import io
 import os
 import sys
 
-import lxml.etree  # pylint: disable=import-error
+try:
+    import lxml.etree  # pylint: disable=import-error
+except ImportError:
+    import lxml
 
 # pylint: disable=line-too-long
 # https://docs.python.org/3/library/io.html
