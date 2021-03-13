@@ -21,6 +21,12 @@ import validate_plist_xml  # pylint: disable=import-error,wrong-import-position
 # run the script
 num_errors = validate_plist_xml.validate_plist_xml.validate_plist_files()
 
-assert num_errors == 2
+try:
+    assert num_errors == 2
+except AssertionError:
+    print("Error: Tests failed")
+    sys.exit(num_errors)
 
+# tests pass, return 0:
+print("Success: Tests pass")
 sys.exit(0)
