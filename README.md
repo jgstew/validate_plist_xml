@@ -1,5 +1,7 @@
 # validate_plist_xml
-This python module will validate Apple XML Plist files
+This python module will validate Apple XML Plist files.
+
+This is pure python and runs on any operating system, tested on Windows, Mac, and Linux.
 
 By default configured to check files with the following extensions: `('.recipe', '.plist', '.profile')`
 
@@ -11,8 +13,14 @@ The code is found within `src/validate_plist_xml/validate_plist_xml.py` within t
 
 This module checks that the plist is valid XML and meets the Apple Plist DTD here: https://www.apple.com/DTDs/PropertyList-1.0.dtd
 
+**Install with pip:**
+```
+pip install validate-plist-xml
+```
 
-## Examples:
+This will install lxml if not already installed.
+
+## Usage Examples:
 
 ### Run as Python Script:
 
