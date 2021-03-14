@@ -98,7 +98,7 @@ import validate_plist_xml
 validate_plist_xml.validate_plist_xml.main('.')
 ```
 
-or as a one liner:
+### Use as Python command:
 
 ```
 python3 -c "import validate_plist_xml; validate_plist_xml.validate_plist_xml.main('.')"
