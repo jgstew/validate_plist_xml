@@ -29,4 +29,4 @@ jobs:
       - name: Install requirements
         run: pip install -r requirements.txt
       - name: Run flake8
-        run: flake8 --show-source --statistics --verbose .
+        run: flake8 --show-source --statistics .
