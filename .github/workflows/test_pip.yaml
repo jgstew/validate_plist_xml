@@ -42,5 +42,5 @@ jobs:
         run: pip install -r requirements.txt
       - name: pip install self
         run: pip install validate-plist-xml
-      - name: Run Tests
+      - name: Run test_pip
         run: python tests/tests.py --test_pip

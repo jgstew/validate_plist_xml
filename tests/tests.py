@@ -22,6 +22,19 @@ if not args.test_pip:
 
 import validate_plist_xml  # pylint: disable=import-error,wrong-import-position
 
+
+print(validate_plist_xml.__file__)
+
+
+# make sure we are testing the right place:
+if args.test_pip:
+    # this will false positive on windows
+    assert "/src/" not in validate_plist_xml.__file__
+else:
+    # check for only 'src' so it will work on windows and non-windows
+    assert "src" in validate_plist_xml.__file__
+
+
 # run the script
 num_errors = validate_plist_xml.validate_plist_xml.validate_plist_files()
 
