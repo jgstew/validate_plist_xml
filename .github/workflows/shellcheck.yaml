@@ -25,3 +25,4 @@ jobs:
           path: "."  # Optional.
           pattern: "*.sh"  # Optional.
           exclude: "./.git/*"  # Optional.
+          fail_on_error: true
