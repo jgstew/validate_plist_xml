@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # to run: `bash .build.sh`
 echo "-- run build and publish to public pypi.org pip --"
 
