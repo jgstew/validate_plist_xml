@@ -1,0 +1,27 @@
+---
+name: pyflakes
+
+on:
+  push:
+    paths:
+      - "**.py"
+      - "requirements.txt"
+      - ".github/workflows/pyflakes.yaml"
+  pull_request:
+    paths:
+      - "**.py"
+      - "requirements.txt"
+      - ".github/workflows/pyflakes.yaml"
+
+jobs:
+  pyflakes:
+    name: runner / pyflakes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: pyflakes
+        uses: reviewdog/action-pyflakes@master
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-check  # Change reporter.
+          fail_on_error: true
