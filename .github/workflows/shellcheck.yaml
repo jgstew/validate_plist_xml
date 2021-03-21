@@ -1,0 +1,27 @@
+---
+name: shellcheck
+
+on:
+  push:
+    paths:
+      - "**.sh"
+      - ".github/workflows/shellcheck.yaml"
+  pull_request:
+    paths:
+      - "**.sh"
+      - ".github/workflows/shellcheck.yaml"
+
+jobs:
+  shellcheck:
+    name: runner / shellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: shellcheck
+        uses: reviewdog/action-shellcheck@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-check # Change reporter.
+          path: "." # Optional.
+          pattern: "*.sh" # Optional.
+          exclude: "./.git/*" # Optional.
