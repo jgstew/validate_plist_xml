@@ -1,5 +1,5 @@
 ---
-name: tests
+name: test_self
 
 on:
   push:
@@ -15,7 +15,7 @@ on:
 
 # https://github.com/actions/setup-python
 jobs:
-  tests:
+  test_self:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -38,5 +38,5 @@ jobs:
         run: python -c "import sys; print(sys.version)"
       - name: Install requirements
         run: pip install -r requirements.txt
-      - name: Run Tests
+      - name: Run test_self
         run: python tests/tests.py
