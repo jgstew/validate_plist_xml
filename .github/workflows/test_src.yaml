@@ -6,12 +6,12 @@ on:
     paths:
       - "**.py"
       - "requirements.txt"
-      - ".github/workflows/tests.yaml"
+      - ".github/workflows/test_src.yaml"
   pull_request:
     paths:
       - "**.py"
       - "requirements.txt"
-      - ".github/workflows/tests.yaml"
+      - ".github/workflows/test_src.yaml"
 
 # https://github.com/actions/setup-python
 jobs:
