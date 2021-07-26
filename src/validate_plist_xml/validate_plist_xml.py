@@ -16,8 +16,9 @@ except ImportError:
 # pylint: disable=line-too-long
 # https://docs.python.org/3/library/io.html
 # https://www.apple.com/DTDs/PropertyList-1.0.dtd
-DTD_PLIST = lxml.etree.DTD(io.StringIO(
-    """<!ENTITY % plistObject "(array | data | date | dict | real | integer | string | true | false )" >
+DTD_PLIST = lxml.etree.DTD(
+    io.StringIO(
+        """<!ENTITY % plistObject "(array | data | date | dict | real | integer | string | true | false )" >
 <!ELEMENT plist %plistObject;>
 <!ATTLIST plist version CDATA "1.0" >
 
@@ -36,7 +37,8 @@ DTD_PLIST = lxml.etree.DTD(io.StringIO(
 <!ELEMENT false EMPTY> <!-- Boolean constant false -->
 <!ELEMENT real (#PCDATA)> <!-- Contents should represent a floating point number matching ("+" | "-")? d+ ("."d*)? ("E" ("+" | "-") d+)? where d is a digit 0-9.  -->
 <!ELEMENT integer (#PCDATA)> <!-- Contents should represent a (possibly signed) integer number in base 10 -->"""
-))
+    )
+)
 
 
 def validate_plist(file_pathname):
@@ -44,16 +46,16 @@ def validate_plist(file_pathname):
     # parse xml
     try:
         doc = lxml.etree.parse(file_pathname)
-        #print('XML well formed, syntax ok.')
+        # print('XML well formed, syntax ok.')
 
     # check for file IO error
     except IOError:
-        print('Invalid File: %s' % file_pathname)
+        print("Invalid File: %s" % file_pathname)
         return False
 
     # check for XML syntax errors
     except lxml.etree.XMLSyntaxError as err:
-        print('XML Syntax Error in: %s' % file_pathname)
+        print("XML Syntax Error in: %s" % file_pathname)
         print(err)
         return False
 
@@ -66,7 +68,7 @@ def validate_plist(file_pathname):
     try:
         DTD_PLIST.assertValid(doc)
     except lxml.etree.DocumentInvalid as err:
-        print('Failed DTD Validation: %s' % file_pathname)
+        print("Failed DTD Validation: %s" % file_pathname)
         print(err)
         return False
     # all other errors
@@ -77,7 +79,9 @@ def validate_plist(file_pathname):
     return True
 
 
-def validate_plist_files(folder_path=".", file_extensions=('.recipe', '.plist', '.profile')):
+def validate_plist_files(
+    folder_path=".", file_extensions=(".recipe", ".plist", ".profile")
+):
     """Validate all plist files in a folder and subfolders"""
     # https://stackoverflow.com/questions/3964681/find-all-files-in-a-directory-with-extension-txt-in-python
 
@@ -87,7 +91,7 @@ def validate_plist_files(folder_path=".", file_extensions=('.recipe', '.plist', 
     for root, dirs, files in os.walk(folder_path):  # pylint: disable=unused-variable
         for file in files:
             # do not scan within .git folder
-            if not root.startswith(('.git', './.git')):
+            if not root.startswith((".git", "./.git")):
                 # process all files ending with `file_extensions`
                 if file.lower().endswith(file_extensions):
                     count_files = count_files + 1
@@ -100,7 +104,7 @@ def validate_plist_files(folder_path=".", file_extensions=('.recipe', '.plist', 
     return count_errors
 
 
-def main(folder_path=".", file_extensions=('.recipe', '.plist', '.profile')):
+def main(folder_path=".", file_extensions=(".recipe", ".plist", ".profile")):
     """Run this function by default"""
 
     # run the validation, get the number of errors
@@ -110,5 +114,5 @@ def main(folder_path=".", file_extensions=('.recipe', '.plist', '.profile')):
     sys.exit(count_errors)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
