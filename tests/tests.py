@@ -2,8 +2,6 @@
 
 import argparse
 import os.path
-
-# import site
 import sys
 
 # check for --test_pip arg
@@ -22,7 +20,6 @@ if not args.test_pip:
     sys.path.reverse()
 
 import validate_plist_xml  # pylint: disable=import-error,wrong-import-position
-
 
 print(validate_plist_xml.__file__)
 
