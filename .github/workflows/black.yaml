@@ -25,5 +25,3 @@ jobs:
         id: action_black
         with:
           black_args: ". --check --diff --color"
-          # TODO: remove this once passing
-          fail_on_error: false
