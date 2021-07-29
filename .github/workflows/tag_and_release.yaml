@@ -29,7 +29,7 @@ jobs:
           ref: main
           running-workflow-name: 'Tag and Release'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 20
+          wait-interval: 30
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
