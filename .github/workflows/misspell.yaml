@@ -1,7 +1,14 @@
 ---
 name: misspell
 
-on: [push, pull_request]
+# only run on potential publishes
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/validate_plist_xml/__init__.py"
+      - ".github/workflows/tag_and_release.yaml"
 
 jobs:
   misspell:
