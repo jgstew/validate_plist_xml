@@ -37,3 +37,5 @@ jobs:
       - name: Test pip install of wheel
         shell: bash
         run: pip install `find "dist" -type f -name "*.whl"`
+      - name: Run test_pip
+        run: python tests/tests.py --test_pip
