@@ -35,4 +35,5 @@ jobs:
       - name: Run build
         run: python3 -m build
       - name: Test pip install of wheel
-        run: pip install ${ find "dist" -type f -name "*.whl" }
+        shell: bash
+        run: pip install `find "dist" -type f -name "*.whl"`
