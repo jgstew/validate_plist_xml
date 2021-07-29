@@ -35,3 +35,13 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: v${{ steps.getversion.outputs.version }}
           prerelease: false
+      - name: Install requirements
+        run: if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Install build tools
+        run: pip install setuptools wheel build
+      - name: Run build
+        run: python3 -m build
+      - name: Publish distribution to PyPI
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}

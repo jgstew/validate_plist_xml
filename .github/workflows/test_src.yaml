@@ -7,11 +7,13 @@ on:
       - "**.py"
       - "requirements.txt"
       - ".github/workflows/test_src.yaml"
+      - ".github/workflows/tag_and_release.yaml"
   pull_request:
     paths:
       - "**.py"
       - "requirements.txt"
       - ".github/workflows/test_src.yaml"
+      - ".github/workflows/tag_and_release.yaml"
 
 # https://github.com/actions/setup-python
 jobs:

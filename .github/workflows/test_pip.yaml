@@ -4,6 +4,7 @@ name: test_pip
 on:
   push:
     paths:
+# note: need to run this based upon pip publish
       - "DISABLE_THIS_FOR_NOW"
 
 # https://github.com/actions/setup-python
