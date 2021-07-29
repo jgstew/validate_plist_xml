@@ -7,6 +7,7 @@ on:
       - main
     paths:
       - "src/validate_plist_xml/__init__.py"
+      - ".github/workflows/tag_and_release.yaml"
 
 jobs:
   release_new_tag:
@@ -21,7 +22,7 @@ jobs:
           python-version: 3.8
       - name: Read VERSION file
         id: getversion
-        run: echo "::set-output name=version::$(python .\setup.py --version)"
+        run: echo "::set-output name=version::$(python ./setup.py --version)"
       - name: Wait for tests to succeed
         uses: lewagon/wait-on-check-action@v0.2
         with:
