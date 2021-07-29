@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - "src/validate_plist_xml/VERSION.txt"
+      - "src/validate_plist_xml/__init__.py"
 
 jobs:
   release_new_tag:
@@ -15,9 +15,13 @@ jobs:
     steps:
       - name: "Checkout source code"
         uses: "actions/checkout@v1"
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
       - name: Read VERSION file
         id: getversion
-        run: echo "::set-output name=version::$(cat src/validate_plist_xml/VERSION.txt)"
+        run: echo "::set-output name=version::$(python .\setup.py --version)"
       - name: Wait for tests to succeed
         uses: lewagon/wait-on-check-action@v0.2
         with:
