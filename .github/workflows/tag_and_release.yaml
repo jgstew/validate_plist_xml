@@ -23,25 +23,36 @@ jobs:
       - name: Read VERSION file
         id: getversion
         run: echo "::set-output name=version::$(python ./setup.py --version)"
+      - name: 'Check: package version has corrosponding git tag'
+        id: tagged
+        shell: bash
+        run: git show-ref --tags --verify --quiet -- "refs/tags/v${{ steps.getversion.outputs.version }}" && echo "::set-output name=tagged::0" || echo "::set-output name=tagged::1"
       - name: Wait for tests to succeed
+        if: steps.tagged.outputs.tagged == 1
         uses: lewagon/wait-on-check-action@v0.2
         with:
           ref: main
           running-workflow-name: 'Tag and Release'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 30
-      - uses: "marvinpinto/action-automatic-releases@latest"
+      - name: Automatically create github release
+        if: steps.tagged.outputs.tagged == 1
+        uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: v${{ steps.getversion.outputs.version }}
           prerelease: false
       - name: Install requirements
+        if: steps.tagged.outputs.tagged == 1
         run: if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Install build tools
+        if: steps.tagged.outputs.tagged == 1
         run: pip install setuptools wheel build
       - name: Run build
+        if: steps.tagged.outputs.tagged == 1
         run: python3 -m build
       - name: Publish distribution to PyPI
+        if: steps.tagged.outputs.tagged == 1
         uses: pypa/gh-action-pypi-publish@master
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
