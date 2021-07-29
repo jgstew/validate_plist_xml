@@ -4,16 +4,7 @@ name: test_pip
 on:
   push:
     paths:
-      - "setup.cfg"
-      - "tests/tests.py"
-      - "requirements.txt"
-      - ".github/workflows/test_pip.yaml"
-  pull_request:
-    paths:
-      - "setup.cfg"
-      - "tests/tests.py"
-      - "requirements.txt"
-      - ".github/workflows/test_pip.yaml"
+      - "DISABLE_THIS_FOR_NOW"
 
 # https://github.com/actions/setup-python
 jobs:

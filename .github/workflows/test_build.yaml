@@ -1,0 +1,36 @@
+---
+name: test_build
+
+on:
+  push:
+    paths:
+      - "**.py"
+      - "setup.cfg"
+      - "pyproject.toml"
+      - "requirements.txt"
+      - ".github/workflows/test_build.yaml"
+      - "src/validate_plist_xml/VERSION.txt"
+  pull_request:
+    paths:
+      - "**.py"
+      - "setup.cfg"
+      - "pyproject.toml"
+      - "requirements.txt"
+      - ".github/workflows/test_build.yaml"
+      - "src/validate_plist_xml/VERSION.txt"
+
+jobs:
+  test_build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install requirements
+        run: if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Install build tools
+        run: pip install setuptools wheel
+      - name: Run build
+        run: python3 -m build

@@ -1,0 +1,32 @@
+---
+name: Tag and Release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/validate_plist_xml/VERSION.txt"
+
+jobs:
+  release_new_tag:
+    name: Tag and Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout source code"
+        uses: "actions/checkout@v1"
+      - name: Read VERSION file
+        id: getversion
+        run: echo "::set-output name=version::$(cat src/validate_plist_xml/VERSION.txt)"
+      - name: Wait for tests to succeed
+        uses: lewagon/wait-on-check-action@v0.2
+        with:
+          ref: main
+          running-workflow-name: 'Tag and Release'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 20
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: v${{ steps.getversion.outputs.version }}
+          prerelease: false
