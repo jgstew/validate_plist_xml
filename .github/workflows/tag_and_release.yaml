@@ -48,14 +48,6 @@ jobs:
       - name: Run build
         if: steps.tagged.outputs.tagged == 1
         run: python3 -m build
-      - name: Publish distribution to PyPI
-        if: steps.tagged.outputs.tagged == 1
-        uses: pypa/gh-action-pypi-publish@master
-        with:
-          password: ${{ secrets.PYPI_API_TOKEN }}
-      # test to see if this gets the wheelfile path
-      # this can then be included in release files automatically
-      # would need to put release after build though
       - name: Get Wheel File
         if: steps.tagged.outputs.tagged == 1
         id: getwheelfile
@@ -70,3 +62,8 @@ jobs:
           prerelease: false
           files: |
             ${{ steps.getwheelfile.outputs.wheelfile }}
+      - name: Publish distribution to PyPI
+        if: steps.tagged.outputs.tagged == 1
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
