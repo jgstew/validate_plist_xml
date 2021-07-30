@@ -34,8 +34,12 @@ jobs:
         run: pip install setuptools wheel build
       - name: Run build
         run: python3 -m build
+      - name: Get Wheel File Path
+        id: getwheelfile
+        shell: bash
+        run: echo "::set-output name=wheelfile::$(find "dist" -type f -name "*.whl")"
       - name: Test pip install of wheel
         shell: bash
-        run: pip install `find "dist" -type f -name "*.whl"`
+        run: pip install ${{ steps.getwheelfile.outputs.wheelfile }}
       - name: Run test_pip
         run: python tests/tests.py --test_pip
