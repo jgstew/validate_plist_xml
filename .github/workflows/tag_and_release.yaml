@@ -23,10 +23,12 @@ jobs:
       - name: Read VERSION file
         id: getversion
         run: echo "::set-output name=version::$(python ./setup.py --version)"
+      # only make release if there is NOT a git tag for this version
       - name: 'Check: package version has corresponding git tag'
         id: tagged
         shell: bash
         run: git show-ref --tags --verify --quiet -- "refs/tags/v${{ steps.getversion.outputs.version }}" && echo "::set-output name=tagged::0" || echo "::set-output name=tagged::1"
+      # wait for all other tests to succeed
       - name: Wait for tests to succeed
         if: steps.tagged.outputs.tagged == 1
         uses: lewagon/wait-on-check-action@v0.2
@@ -56,3 +58,11 @@ jobs:
         uses: pypa/gh-action-pypi-publish@master
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
+      # test to see if this gets the wheelfile path
+      # this can then be included in release files automatically
+      # would need to put release after build though
+      - name: Get Wheel File
+        if: steps.tagged.outputs.tagged == 1
+        id: getwheelfile
+        shell: bash
+        run: echo "::set-output name=wheelfile::$(find "dist" -type f -name "*.whl")"
